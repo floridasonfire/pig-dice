@@ -22,10 +22,8 @@ Player.prototype.rollDie = function(){
     this.turnScore += rollScore;
 
   }else{
-    rollScore = 0;
     this.turnScore = 0;
-    return "Hit One";
-  }
+  };
 
   diceArray.push(dice1, dice2);
   return diceArray;
@@ -42,15 +40,47 @@ Player.prototype.newTurn = function() {
 };
 
 Player.prototype.scoreCheck = function() {
-  if(this.score >= 100){
+  if(this.score >= 10){
     return "Win";
   };
 };
 
-Player.prototype.newGame = function(){
+Player.prototype.newGame = function() {
   this.turnScore = 0;
   this.score = 0;
 
+
+}
+
+var hideRowAndButtons = function(){
+  $(".first-row").hide();
+  $(".buttons-1").hide();
+  $(".buttons-2").hide();
+}
+
+var showRowAndPlayer1Button = function(){
+  $(".first-row").fadeIn("fast");
+  $(".buttons-1").fadeIn("slow");
+}
+
+var showPlayer2Button = function(){
+  $(".buttons-1").fadeOut("slow");
+  $(".buttons-2").fadeIn("slow");
+}
+
+var showPlayer1Button = function(){
+  $(".buttons-2").fadeOut("slow");
+  $(".buttons-1").fadeIn("slow");
+}
+
+var getDicePicture = function(number){
+  number = number.toString()
+  return '<img class="die-pic" src="css/' + number + '.jpg" />'
+}
+
+var getRandomPig = function(){
+  number = Math.random(Math.floor(Math.random() * 9) + 1)
+  return '<img class="pig-pic" src="css/' + number + 'pig.jpg" />'
 
 }
 
@@ -58,12 +88,13 @@ Player.prototype.newGame = function(){
 
 $(document).ready(function() {
 
-  $(".first-row").hide();
-  $(".buttons-1").hide();
-  $(".buttons-2").hide();
+  hideRowAndButtons();
+
 
   $("#player-name-form").submit(function(event) {
     event.preventDefault();
+
+    showRowAndPlayer1Button();
 
     var player1input = $("#player-1").val();
     var player2input = $("#player-2").val();
@@ -74,8 +105,7 @@ $(document).ready(function() {
     var player1 = new Player(player1input, 0, 0);
     var player2 = new Player(player2input, 0, 0);
 
-    $(".first-row").fadeIn("fast");
-    $(".buttons-1").fadeIn("slow");
+
 
 // PLAYER ONE ROLL AND STOP BUTTON BELOW
 
@@ -85,19 +115,26 @@ $(document).ready(function() {
 
             var player1Dice = player1.rollDie();
 
-            $(".player-1-roll").text(" " + player1Dice);
-            $(".player-1-score").text(" " + player1.turnScore);
-            $(".player-1-total-score").text(" " + player1.score);
+            var dice1Src = getDicePicture(player1Dice[0]);
+            var dice2Src = getDicePicture(player1Dice[1]);
 
-            if(player1Dice === "Hit One"){
+            $(".dice1-pics").html(dice1Src + dice2Src);
+
+            if(player1Dice[0] === 1 || player1Dice[1]===1){
               $(".buttons-1").fadeOut("slow");
               $(".buttons-2").fadeIn("slow");
             };
 
-            var winner = player1.scoreCheck();
+
+            $(".player-1-roll").text(" " + player1Dice);
+            $(".player-1-score").text(" " + player1.turnScore);
+            $(".player-1-total-score").text(" " + player1.score);
+
 
           });
       };
+
+
 
 
       var player1Stops = function(){
@@ -122,12 +159,12 @@ $(document).ready(function() {
             $(".player-2-roll").text(" ");
 
           }else{
-            $(".buttons-1").fadeOut("slow");
-            $(".buttons-2").fadeIn("slow");
+            showPlayer2Button();
           }
 
         });
       };
+
 
 
 
@@ -139,19 +176,23 @@ $(document).ready(function() {
 
             var player2Dice = player2.rollDie();
 
+            var dice1Src = getDicePicture(player2Dice[0]);
+            var dice2Src = getDicePicture(player2Dice[1]);
+            $(".dice2-pics").html(dice1Src + dice2Src);
+
+            if(player2Dice[0] === 1 || player2Dice[1] === 1){
+              showPlayer1Button();
+            };
+
             $(".player-2-roll").text(" " + player2Dice);
             $(".player-2-score").text(" " + player2.turnScore);
             $(".player-2-total-score").text(" " + player2.score);
 
-            if(player2Dice === "Hit One"){
-              $(".buttons-2").fadeOut("slow");
-              $(".buttons-1").fadeIn("slow");
-            };
-
-            var winner = player2.scoreCheck();
 
           });
       };
+
+
 
 
 
@@ -178,8 +219,7 @@ $(document).ready(function() {
             $(".buttons-2").fadeOut("slow");
             $(".buttons-1").fadeIn("slow");
           }else{
-            $(".buttons-2").fadeOut("slow");
-            $(".buttons-1").fadeIn("slow");
+            showPlayer1Button();
           }
 
         });
