@@ -18,20 +18,24 @@
 
 
 
-      <div class="row">
+      <div class="row form-row">
         <div class="col-sm-12">
           <h1>Pig Dice</h1>
-        </div>
+          <h4>Enter your names to play</h4>
+
+
+        <form id="player-name-form">
+          <input type="text" id="player-1" placeholder="Player 1">
+          <input type="text" id="player-2" placeholder="Player 2">
+          <button type="submit">Start Game</button>
+        </form>
       </div>
-      <br>
-      <form id="player-name-form">
-        <input type="text" id="player-1" placeholder="Player 1">
-        <input type="text" id="player-2" placeholder="Player 2">
-        <button type="submit">Start Game</button>
-      </form>
-      <br><br>
+      </div>
 
       <div class="row">
+        <h6 class="rules">Roll the die. If either dice rolls a 1 you get no points added to your score and the turn goes to the other player.</h6>
+        <h6 class="rules">If you choose to Stop Turn you get all of the points for that turn. Whoever hits 100 wins!</h6>
+
         <div class="col-sm-6">
           <h2 class="player-1-name">
           </h2>
@@ -48,20 +52,20 @@
 
 
       <div class="row first-row" >
-
         <div class="col-sm-3 player-1-div">
           <h4>TURN SCORE:<span class="player-1-score"></span></h4>
           <h4>YOUR TOTAL SCORE:<span class="player-1-total-score"></span></h4>
           <br><br>
         </div>
 
-          <div class="col-sm-3">
-            <div class="player-1-dice">
+          <div class="col-sm-2 player-1-dice">
               <h5>YOUR ROLL:<span class="player-1-roll"></span></h5>
-            </div>
               <span class="dice1-pics"></span>
           </div>
 
+          <div class="col-sm-2 pig-pic-div">
+            <span class="pig-picture"></span>
+          </div>
 
         <div class="col-sm-3 player-2-div">
             <h4>TURN SCORE:<span class="player-2-score"></span></h4>
@@ -70,13 +74,10 @@
         </div>
 
 
-        <div class="col-sm-3">
-          <div class="player-2-dice">
+        <div class="col-sm-2 player-2-dice">
             <h5>YOUR ROLL:<span class="player-2-roll"></span></h5>
-          </div>
-          <span class="dice2-pics"></span>
+            <span class="dice2-pics"></span>
         </div>
-
       </div>
 
 

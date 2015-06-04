@@ -1,12 +1,30 @@
-.player-1-div {
-  background-color:teal;
-}
-
-.player-2-div{
-  background-color:purple;
-}
-
 .die-pic{
   width:80px;
   padding:5px;
+}
+
+.form-row{
+  text-align:center;
+}
+
+.rules{
+  text-align:center;
+}
+
+.pig-pic{
+  width:100px;
+  border-radius:20px;
+  position:relative;
+  left:25px;
+  top:10px;
+}
+
+.buttons-2{
+  position:relative;
+  left:18%;
+}
+
+.player-2-name{
+  position:relative;
+  left:17%;
 }

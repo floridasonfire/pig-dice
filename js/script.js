@@ -40,7 +40,7 @@ Player.prototype.newTurn = function() {
 };
 
 Player.prototype.scoreCheck = function() {
-  if(this.score >= 10){
+  if(this.score >= 100){
     return "Win";
   };
 };
@@ -79,7 +79,7 @@ var getDicePicture = function(number){
 }
 
 var getRandomPig = function(){
-  number = Math.random(Math.floor(Math.random() * 9) + 1)
+  number = Math.floor(Math.random() * 9) + 1
   return '<img class="pig-pic" src="css/' + number + 'pig.jpg" />'
 
 }
@@ -89,12 +89,13 @@ var getRandomPig = function(){
 $(document).ready(function() {
 
   hideRowAndButtons();
-
-
   $("#player-name-form").submit(function(event) {
     event.preventDefault();
 
     showRowAndPlayer1Button();
+    var pigPicture = getRandomPig();
+    $(".pig-picture").html(pigPicture);
+
 
     var player1input = $("#player-1").val();
     var player2input = $("#player-2").val();
@@ -139,6 +140,8 @@ $(document).ready(function() {
 
       var player1Stops = function(){
         $(".stop-1").click(function(){
+          var pigPicture = getRandomPig();
+          $(".pig-picture").html(pigPicture);
 
           player1.stop();
           $(".player-1-total-score").text(" " + player1.score);
@@ -198,6 +201,8 @@ $(document).ready(function() {
 
       var player2Stops = function(){
         $(".stop-2").click(function(){
+          var pigPicture = getRandomPig();
+          $(".pig-picture").html(pigPicture);
 
           player2.stop();
           $(".player-2-total-score").text(" " + player2.score);
